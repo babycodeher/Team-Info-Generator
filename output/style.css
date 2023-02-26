@@ -1,0 +1,15 @@
+h1, h2, h3 {
+    color: white;
+}
+
+.team-heading {
+    background-color: rgb(56, 36, 50);
+}
+
+.card-header {
+    background-color: rgb(27, 108, 27);
+}
+
+.employee-card {
+    padding: 25px;
+}
