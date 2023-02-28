@@ -1,6 +1,4 @@
 const Manager = require("./lib/Manager");
-// const Engineer = require("./lib/Engineer");
-// const Intern = require("./lib/Intern");
 const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs/promises");
@@ -18,75 +16,145 @@ const Engineer = require("./lib/Engineer");
 
 let team = [];
 
-async function startProgram() {
-    let data = await inquirer
-        .prompt([
-            {
-                type: "list",
-                name: "employee",
-                message: "Which team member will you like to add?",
-                choices: ["Manager", "Engineer", "Intern"],
-            },
-            {
-                type: "input",
-                name: "name",
-                message: "What's the employee's name?",
-            },
-            {
-                type: "input",
-                name: "id",
-                message: "What's the employee's id number",
-            },
-            {
-                type: "input",
-                name: "email",
-                message: "What is the employee's email address?",
-            },
-            {
-                type: "input",
-                name: "officeNumber",
-                message: "What is your office number?",
-                when(answers) {
-                    return answers.employee === "Manager";
-                },
-            },
-            {
-                type: "input",
-                name: "gitHub",
-                message: "What is your gitHub username?",
-                when(answers) {
-                    return answers.employee === "Engineer";
-                },
-            },
-            {
-                type: "input",
-                name: "school",
-                message: "What school do you attend?",
-                when(answers) {
-                    return answers.employee === "Intern";
-                },
-            },
-            {
-                type: "confirm",
-                name: "askAgain",
-                message: "Want to enter another employee's detail? (just hit enter for YES)?",
-                default: true,
-            },
-        ]);
+function teamQuestion() {
+    inquirer.prompt([
+        {
+            type: "list",
+            name: "employee",
+            message: "Which team member will you like to add?",
+            choices: ["Add an engineer", "Add an intern", "Finish building"],
+        },
+    ])
+        .then(function (response) {
+            if (response.employee === "Add an engineer") {
+                engineer()
 
-    const manager1 = new Manager(data.name, data.id, data.email, data.officeNumber);
-    const engineer1 = new Engineer(data.name, data.id, data.email, data.gitHub);
-    const intern1 = new Intern(data.name, data.id, data.email, data.school);
-    // const manager = (new Manager(input.name, input.id, input.email, input.officeNumber));
+            }
+            else if (response.employee === "Add an intern") {
+                intern()
 
-    team.push(manager1);
-    team.push(engineer1);
-    team.push(intern1);
-        // team.push();
+            } else {
+                buildTeam()
+            }
+        })
 
+}
+
+
+async function managerInfo() {
+    let managerData = await inquirer.prompt([
+        {
+            type: "input",
+            name: "name",
+            message: "What's the manager's name?",
+        },
+        {
+            type: "input",
+            name: "id",
+            message: "What's the manager's id number",
+        },
+        {
+            type: "input",
+            name: "email",
+            message: "What is the manager's email address?",
+        },
+        {
+            type: "input",
+            name: "officeNumber",
+            message: "What is your office number?",
+        },
+        {
+            type: "confirm",
+            name: "askAgain",
+            message: "Do you want to enter another employee's detail? (just hit enter for YES)?",
+            default: true,
+        },
+
+
+    ])
+    const manager = new Manager(managerData.name, managerData.id, managerData.email, managerData.officeNumber);
+    team.push(manager);
+    teamQuestion()
+}
+
+
+async function engineer() {
+    let engineerData = await inquirer.prompt([
+        {
+            type: "input",
+            name: "name",
+            message: "What's the engineer's name?",
+        },
+        {
+            type: "input",
+            name: "id",
+            message: "What's the engineer's id number",
+        },
+        {
+            type: "input",
+            name: "email",
+            message: "What is the engineer's email address?",
+        },
+        {
+            type: "input",
+            name: "gitHub",
+            message: "What is the engineer's gitHub username?",
+        },
+        {
+            type: "confirm",
+            name: "askAgain",
+            message: "Do you want to enter another employee's detail? (just hit enter for YES)?",
+            default: true,
+        },
+
+    ])
+
+    const engineer = new Engineer(engineerData.name, engineerData.id, engineerData.email, engineerData.gitHub);
+    team.push(engineer);
+    teamQuestion();
+
+}
+
+
+async function intern() {
+    let internData = await inquirer.prompt([
+        {
+            type: "input",
+            name: "name",
+            message: "What's the intern's name?",
+        },
+        {
+            type: "input",
+            name: "id",
+            message: "What's the intern's id number",
+        },
+        {
+            type: "input",
+            name: "email",
+            message: "What is the intern's email address?",
+        },
+        {
+            type: "input",
+            name: "school",
+            message: "What school does the intern attend?",
+        },
+        {
+            type: "confirm",
+            name: "askAgain",
+            message: "Do you want to enter another employee's detail? (just hit enter for YES)?",
+            default: true,
+        },
+    ]);
+
+    const intern = new Intern(internData.name, internData.id, internData.email, internData.school);
+    team.push(intern);
+    teamQuestion();
+}
+
+async function buildTeam() {
     let htmlDoc = render(team)
 
     await fs.writeFile(outputPath, htmlDoc);
 }
 
-startProgram();
+managerInfo();

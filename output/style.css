@@ -3,13 +3,9 @@ h1, h2, h3 {
 }
 
 .team-heading {
-    background-color: rgb(56, 36, 50);
+    background-color: rgb(53, 51, 52);
 }
 
 .card-header {
-    background-color: rgb(27, 108, 27);
-}
-
-.employee-card {
-    padding: 25px;
+    background-color: rgb(119, 104, 54);
 }
