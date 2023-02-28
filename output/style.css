@@ -1,11 +1,23 @@
 h1, h2, h3 {
-    color: white;
+    color: white
+;
 }
 
 .team-heading {
-    background-color: rgb(53, 51, 52);
+    background-color: #261c15;
 }
 
 .card-header {
-    background-color: rgb(119, 104, 54);
+    background-color: #af3b6e;
+}
+
+.card {
+    border: 2px solid;
+    border-radius: 2%;
+    box-shadow: 2px 2px 2px 2px;
+}
+
+.card-body {
+    background-color: #f7f7f2;
+    padding: 12px;
 }
