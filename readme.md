@@ -7,7 +7,7 @@ This project is a Node.js command-line application developed to enable a user (i
 ## Installation
 In order to be able to use this application, the user has to install 
 * [Inquirer](https://www.npmjs.com/package/inquirer) for collecting user inputs
-* [Jest](https://www.npmjs.com/package/jest)for running the unit tests
+* [Jest](https://www.npmjs.com/package/jest) for running the unit tests
 
 * The application will be started using the following command:
 
