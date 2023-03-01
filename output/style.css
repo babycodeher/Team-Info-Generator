@@ -15,9 +15,14 @@ h1, h2, h3 {
     border: 2px solid;
     border-radius: 2%;
     box-shadow: 2px 2px 2px 2px;
+    margin-left: 15px;
 }
 
 .card-body {
     background-color: #f7f7f2;
     padding: 12px;
+}
+
+.container {
+    margin: 45px auto;
 }
