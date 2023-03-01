@@ -23,7 +23,7 @@ function teamQuestion() {
             type: "list",
             name: "employee",
             message: "Which team member will you like to add?",
-            choices: ["Add an engineer", "Add an intern", "Finish building"],
+            choices: ["Add an engineer", "Add an intern", "Finish building team"],
         },
     ])
         .then(function (response) {
